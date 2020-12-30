@@ -62,13 +62,17 @@ Masukkan ‘Exit' untuk keluar.`;
     if (idx == -1) {
       console.log(`Kursi dengan kode ${seatCode} tidak tersedia!`);
     } else {
-      console.log(`Proses booking kursi ${seatCode} berhasil!`);
-      this.seats.map((seat) => {
-        if (seat.name == seatCode) {
-          (seat.status = "Sold"), (seat.booking_time = new Date());
-        }
-        return seat;
-      });
+      if (this.seats[idx].status == "Sold") {
+        console.log(`Maaf kursi dengan kode ${seatCode} sudah di booking!`);
+      } else {
+        console.log(`Proses booking kursi ${seatCode} berhasil!`);
+        this.seats.map((seat) => {
+          if (seat.name == seatCode) {
+            (seat.status = "Sold"), (seat.booking_time = new Date());
+          }
+          return seat;
+        });
+      }
     }
   }
   cancel_seat(seatCode) {
@@ -76,13 +80,17 @@ Masukkan ‘Exit' untuk keluar.`;
     if (idx == -1) {
       console.log(`Kursi dengan kode ${seatCode} tidak tersedia!`);
     } else {
-      console.log(`Proses cancel kursi ${seatCode} berhasil!`);
-      this.seats.map((seat) => {
-        if (seat.name == seatCode) {
-          (seat.status = "Free"), (seat.cancel_time = new Date());
-        }
-        return seat;
-      });
+      if (this.seats[idx].status == "Free") {
+        console.log(`Maaf kursi dengan kode ${seatCode} belum di booking!`);
+      } else {
+        console.log(`Proses cancel kursi ${seatCode} berhasil!`);
+        this.seats.map((seat) => {
+          if (seat.name == seatCode) {
+            (seat.status = "Free"), (seat.cancel_time = new Date());
+          }
+          return seat;
+        });
+      }
     }
   }
   transaction_status() {
